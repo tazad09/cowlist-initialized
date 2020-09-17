@@ -1,4 +1,7 @@
+const bodyParser = require("body-parser");
 const models = require("./models");
+
+
 
 module.exports = {
   getAll: function (req, res) {
@@ -12,6 +15,7 @@ module.exports = {
   },
 
   postOne: function (req, res) {
+    console.log(req.body)
     let params = [req.body.name, req.body.description];
     models.create(params, function (err, result) {
       if (err) {
@@ -25,7 +29,7 @@ module.exports = {
   },
 
   update: function (req, res) {
-    let params = [req.body.name, req.params.id];
+    let params = [req.body.name, req.body.description, req.params.id];
     models.update(params, (err, result) => {
       if (err) {
         callback(err, null)

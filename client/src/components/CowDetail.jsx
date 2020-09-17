@@ -15,7 +15,7 @@ class CowDetail extends React.Component {
       <div>
         <div>
           <div onClick={() => this.setState({showDescription: !this.state.showDescription})}> {this.props.cow.name}</div>
-          <div class='cow-description'>
+          <div className='cow-description'>
             {this.state.showDescription ? <div className='cow-description'>{this.props.cow.description}</div> : null}
           </div>
         </div>

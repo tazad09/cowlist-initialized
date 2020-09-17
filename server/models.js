@@ -2,7 +2,7 @@ const db = require("./db/index.js");
 
 module.exports = {
   readAll: function (callback) {
-    let qryStr = "SELECT name, description FROM cows";
+    let qryStr = "SELECT name, description FROM cows ORDER BY id DESC";
     db.query(qryStr, (err, result) => {
       if (err) {
         callback(err, null);
@@ -24,7 +24,7 @@ module.exports = {
   },
 
   update: function (params, callback) {
-    let qryStr = 'UPDATE cows SET name = (?) WHERE id = (?)';
+    let qryStr = 'UPDATE cows SET name = (?), description = (?) WHERE id = (?)';
     db.query(qryStr, params, (err, result) => {
       if (err) {
         callback(err, null)

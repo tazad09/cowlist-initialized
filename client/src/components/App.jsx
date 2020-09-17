@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import SearchBar from "./SearchBar";
+import CreateNewCow from "./CreateNewCow";
 import List from "./List";
 
 class App extends React.Component {
@@ -8,11 +8,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       cows: [],
+      name: '',
+      description: ''
     };
-    this.onTermSubmit = this.onTermSubmit.bind(this);
+    //this.getCows = this.getCows.bind(this);
+    this.create = this.create.bind(this)
   }
 
-  onTermSubmit(term) {}
   componentDidMount() {
     this.getCows();
   }
@@ -25,16 +27,21 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  create (name, description) {
+    return axios.post('/api/cows', {name: name, description: description
+    })
+    .then(() => this.getCows()) //.then(this.getCows) ---> page needs to be refreshed
+    .catch((err) => console.log(err))
+  }
+
   render() {
     return (
       <div>
         <div>
-          {" "}
-          <SearchBar onFormSubmit={this.onTermSubmit} />{" "}
+          <CreateNewCow submitPost={this.create}/>
         </div>
         <div>
-          {" "}
-          <List cowsList={this.state.cows} />{" "}
+          <List cowsList={this.state.cows} />
         </div>
       </div>
     );
