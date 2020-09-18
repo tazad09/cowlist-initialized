@@ -40,7 +40,7 @@ module.exports = {
   },
 
   delete: function (req, res) {
-    let params = req.params.id;
+    let params = req.body.id
     models.delete(params, (err, result) => {
       data = result
       if (err) {

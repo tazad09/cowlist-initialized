@@ -11,8 +11,9 @@ class App extends React.Component {
       name: '',
       description: ''
     };
-    //this.getCows = this.getCows.bind(this);
-    this.create = this.create.bind(this)
+    this.getCows = this.getCows.bind(this);
+    this.create = this.create.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +31,18 @@ class App extends React.Component {
   create (name, description) {
     return axios.post('/api/cows', {name: name, description: description
     })
-    .then(() => this.getCows()) //.then(this.getCows) ---> page needs to be refreshed
+    .then(this.getCows) //.then(this.getCows) ---> page needs to be refreshed
+    .catch((err) => console.log(err))
+  }
+
+  delete (id) {
+    let options = {
+      method: "DELETE",
+      url: "/api/cows/:id",
+      data: {id: id}
+    }
+    return axios(options)
+    .then(this.getCows)
     .catch((err) => console.log(err))
   }
 
@@ -41,7 +53,7 @@ class App extends React.Component {
           <CreateNewCow submitPost={this.create}/>
         </div>
         <div>
-          <List cowsList={this.state.cows} />
+          <List cowsList={this.state.cows} onClick={this.delete} />
         </div>
       </div>
     );

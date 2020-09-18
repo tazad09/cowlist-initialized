@@ -2,7 +2,7 @@ const db = require("./db/index.js");
 
 module.exports = {
   readAll: function (callback) {
-    let qryStr = "SELECT name, description FROM cows ORDER BY id DESC";
+    let qryStr = "SELECT name, description, id FROM cows ORDER BY id DESC";
     db.query(qryStr, (err, result) => {
       if (err) {
         callback(err, null);
@@ -35,7 +35,7 @@ module.exports = {
   },
 
   delete: function (params, callback) {
-    let qryStr = 'DELETE FROM cows WHERE id = ?'
+    let qryStr = 'DELETE FROM cows WHERE id = ?';
     db.query(qryStr, params, (err, result) => {
       if (err) {
         callback (err, null)
